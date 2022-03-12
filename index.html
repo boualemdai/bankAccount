@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <h2>Log in to get started</h2>
+      <i class="fa-solid fa-building-columns"></i>
+      <section class="login">
+        <input type="text" placeholder="user" id="user-name" /><input
+          type="text"
+          placeholder="PIN"
+          id="password"
+        />
+        <button type="submit" id="log-in">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        </button>
+      </section>
+    </header>
+    <main>
+      <section class="display-section">
+        <h3>Current balance</h3>
+        <span>11/11/2022</span>
+        <div class="display">
+          <div class="exemple">
+            <p>Type</p>
+            <p>Date</p>
+            <p>Value</p>
+          </div>
+        </div>
+        <section class="statistic">
+          <div id="in">
+            <p>IN</p>
+            <span>0.00</span>
+          </div>
+          <div id="out">
+            <p>OUT</p>
+            <span>0.00</span>
+          </div>
+          <div id="interest">
+            <p>Interest</p>
+            <span>0.00</span>
+          </div>
+          <button id="sort">sort</button>
+        </section>
+      </section>
+      <section class="operation-section">
+        <h3 class="solde">0.00</h3>
+        <div class="box transfer">
+          <h4>Transfer money</h4>
+          <div class="inputs">
+            <label for="transfer-to">
+              <input type="text" id="transfer-to" /> <br />
+              Transfer-to
+            </label>
+            <label for="amount">
+              <input type="number" id="amount" /><br />
+              Amount
+            </label>
+            <button type="submit" id="trnsfer-btn">go</button>
+          </div>
+        </div>
+        <div class="box request">
+          <h4>Request loan</h4>
+          <div class="inputs">
+            <label for="loan">
+              <input type="number" id="loan" /><br />
+              Amount
+            </label>
+            <button type="submit" id="loan-btn">go</button>
+          </div>
+        </div>
+        <div class="box close">
+          <h4>close account</h4>
+          <div class="inputs">
+            <label for="pseudo">
+              <input type="text" id="pseudo" /><br />
+              confirm user
+            </label>
+            <label for="pin">
+              <input type="password" id="pin" /><br />
+              confirm pin
+            </label>
+            <button type="submit" id="log-out">go</button>
+          </div>
+        </div>
+        <div class="chrono">
+          <p>You will be logged out in</p> <span><span>
+          
+        </div>
+      </section>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>

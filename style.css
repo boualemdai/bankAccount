@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  justify-content: space-between;
+  color: #363636;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  background-color: rgb(243, 243, 243);
+}
+header {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+}
+input[type="text"] {
+  appearance: none;
+  padding: 0.4rem;
+  width: 6rem;
+  margin-left: 1rem;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+}
+button[type="submit"] {
+  appearance: none;
+  padding: 0.4rem;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.fa-building-columns {
+  font-size: 3rem;
+}
+main {
+  display: flex;
+  min-width: 52rem;
+  max-width: 52rem;
+
+  margin: 4rem auto;
+  height: 100vh;
+}
+.display-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  flex-basis: 55%;
+}
+.hidden{
+  display: none;
+}
+
+.operation-section {
+  display: flex;
+  flex-direction: column;
+
+  flex-basis: 45%;
+  height: 100%;
+}
+.box {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1rem;
+  border-radius: 0.5rem;
+  flex-basis: 25%;
+}
+.display {
+  flex-basis: 83%;
+  background-color: white;
+  overflow-y: auto;
+  border-radius: 0.5rem;
+}
+.box h4 {
+  text-align: center;
+   
+   
+  padding-bottom: 1rem;
+}
+.inputs {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.box label {
+  margin-right: 0.8rem;
+}
+.box input {
+  appearance: none;
+  padding: 0.3rem;
+  width: 8rem;
+  margin: 0;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+}
+.transfer {
+  background-image: linear-gradient(135deg, #cac531, #f3f9a7);
+}
+.request {
+  background-image: linear-gradient(135deg, #56ab2f, #a8e063);
+}
+.close {
+  background-image: linear-gradient(135deg, #7b4397, #dc2430);
+}
+.exemple {
+  padding: 1rem;
+  display: flex;
+}
+.solde {
+  text-align: end;
+  font-size: 2rem;
+  padding-right: 1rem;
+}
+.display-section h3 {
+  font-size: 2rem;
+}
+.display-section span {
+  padding-left: 1rem;
+}
+.statistic{
+  display: flex;
+}
+
+
+@media (max-width:900px) {
+  html{
+    font-size: 14px
+  }
+}
+p{
+  display: inline
+}
+#sort{
+  cursor: pointer;
+}
+.chrono{
+  text-align: end;
+  padding: 0 1rem;
+}
+.chrono>span{
+  font-weight: bolder;
+}
