@@ -35,12 +35,19 @@
       <section class="display-section">
         <h3>Current balance</h3>
         <span>11/11/2022</span>
-        <div class="display">
-          <div class="exemple">
-            <p>Type</p>
+        <div class="disp-div">
+        <header>
+          <div class="disply-header">
+            <p >Type</p>
             <p>Date</p>
-            <p>Value</p>
+            <p>Amount</p>
+            <p>Currencie</p>
+                </div>
+        </header>
+        <div class="display">
+          
           </div>
+        </div>
         </div>
         <section class="statistic">
           <div id="in">
@@ -55,11 +62,14 @@
             <p>Interest</p>
             <span>0.00</span>
           </div>
-          <button id="sort">sort</button>
+          <button id="sort">sort<i class="fa-solid fa-arrow-down"></i></button>
         </section>
       </section>
       <section class="operation-section">
-        <h3 class="solde">0.00</h3>
+        <div class="solde-devision">
+        <h3 class="solde" style="display: inline;">0.00</h3>
+        <span>$</span>
+        </div>
         <div class="box transfer">
           <h4>Transfer money</h4>
           <div class="inputs">
@@ -71,7 +81,7 @@
               <input type="number" id="amount" /><br />
               Amount
             </label>
-            <button type="submit" id="trnsfer-btn">go</button>
+            <button type="submit" id="trnsfer-btn"><i class="fa-solid fa-arrow-right"></i></button>
           </div>
         </div>
         <div class="box request">
@@ -81,7 +91,7 @@
               <input type="number" id="loan" /><br />
               Amount
             </label>
-            <button type="submit" id="loan-btn">go</button>
+            <button type="submit" id="loan-btn"><i class="fa-solid fa-arrow-right"></i></button>
           </div>
         </div>
         <div class="box close">
@@ -95,7 +105,7 @@
               <input type="password" id="pin" /><br />
               confirm pin
             </label>
-            <button type="submit" id="log-out">go</button>
+            <button type="submit" id="log-out"><i class="fa-solid fa-arrow-right"></i></button>
           </div>
         </div>
         <div class="chrono">

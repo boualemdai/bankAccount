@@ -4,11 +4,12 @@
   margin: 0;
   box-sizing: border-box;
   justify-content: space-between;
-  color: #363636;
+
   font-family: "Poppins", sans-serif;
 }
 body {
   background-color: rgb(243, 243, 243);
+  color: #363636;
 }
 header {
   display: flex;
@@ -25,7 +26,8 @@ input[type="text"] {
 }
 button[type="submit"] {
   appearance: none;
-  padding: 0.4rem;
+  padding: 0.35rem;
+  width: 2rem;
   border: 1px solid white;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -35,29 +37,28 @@ button[type="submit"] {
 }
 main {
   display: flex;
-  min-width: 52rem;
-  max-width: 52rem;
+  width: 50rem;
+  height: 38rem;
 
   margin: 4rem auto;
-  height: 100vh;
 }
 .display-section {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 100%;
-  flex-basis: 55%;
+  width: 30rem;
+  height: 38rem;
 }
-.hidden{
+.hidden {
   display: none;
 }
 
 .operation-section {
   display: flex;
   flex-direction: column;
-
-  flex-basis: 45%;
-  height: 100%;
+  justify-content: flex-start;
+  width: 20rem;
+  height: 38rem;
 }
 .box {
   padding: 0.5rem;
@@ -65,20 +66,21 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 1rem;
+  margin: 1rem 1rem;
   border-radius: 0.5rem;
-  flex-basis: 25%;
+  height: 8rem;
+  box-shadow: 0 4px 8px gray;
 }
 .display {
-  flex-basis: 83%;
+  height: 28rem;
   background-color: white;
   overflow-y: auto;
   border-radius: 0.5rem;
+  box-shadow: 0 4px 8px gray;
 }
 .box h4 {
   text-align: center;
-   
-   
+
   padding-bottom: 1rem;
 }
 .inputs {
@@ -92,7 +94,7 @@ main {
 .box input {
   appearance: none;
   padding: 0.3rem;
-  width: 8rem;
+  width: 6.5rem;
   margin: 0;
   border: 1px solid white;
   border-radius: 0.5rem;
@@ -109,11 +111,13 @@ main {
 .exemple {
   padding: 1rem;
   display: flex;
+  text-align: center;
 }
 .solde {
   text-align: end;
   font-size: 2rem;
   padding-right: 1rem;
+  height: 2rem;
 }
 .display-section h3 {
   font-size: 2rem;
@@ -121,26 +125,102 @@ main {
 .display-section span {
   padding-left: 1rem;
 }
-.statistic{
+.statistic {
   display: flex;
+  align-items: center;
+  margin-top: 1rem;
 }
 
-
-@media (max-width:900px) {
-  html{
-    font-size: 14px
-  }
+p {
+  display: inline;
+  flex-basis: 25%;
 }
-p{
-  display: inline
-}
-#sort{
+#sort {
   cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  border: none;
 }
-.chrono{
+.chrono {
   text-align: end;
   padding: 0 1rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
 }
-.chrono>span{
+.chrono > span {
   font-weight: bolder;
+}
+.solde-devision {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 2.4rem;
+}
+.solde-devision > span {
+  flex-basis: 10%;
+  font-size: 2rem;
+  font-weight: bolder;
+}
+#in {
+  color: #56ab2f;
+  font-size: 1.2rem;
+  font-weight: bolder;
+}
+#out {
+  color: red;
+  font-size: 1.2rem;
+  font-weight: bolder;
+}
+#interest {
+  font-size: 1.2rem;
+  font-weight: bolder;
+}
+
+.inputs > button[type="submit"] {
+  padding: 0.3rem;
+  
+}
+.dep {
+  background-color: #56ab2f;
+  border-radius: 1rem;
+  color: white;
+}
+.wit {
+  background-color: red;
+  border-radius: 1rem;
+  color: white;
+}
+.display-section>.disp-div>header{
+  margin: 0;
+  width: 30rem;
+}
+.disp-div{
+  display: flex;
+  flex-direction: column;
+}
+.disply-header{
+  margin-top: 0.5rem;
+ display: flex;
+ width: 30rem;
+ text-align: center;
+
+
+
+}
+@media (max-width: 900px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 750px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 660px) {
+  html {
+    font-size: 12px;
+  }
 }

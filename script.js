@@ -20,16 +20,15 @@ const sort = document.getElementById("sort");
 const chrono = document.querySelector(".chrono>span");
 const greeting = document.querySelector("header>h2");
 
+
 let myInterval;
 let seconds;
 let mins;
 let sorted = false;
 
-const userObj = {
-  boualem: "123",
-  mouloud: "456",
-  mustapha: "789",
-  amine: "111",
+const usersPin = {
+  mustapha: "22",
+  amine: "11",
 };
 
 const mustaphaMap = new Map([
@@ -45,14 +44,7 @@ const amineMap = new Map([
   ["04/10/2022", [-2000, "$"]],
 ]);
 
-console.log(
-  mustaphaMap.forEach(([val, cur], date) => {
-    console.log("date=", date, "value=", val, "cur=", cur);
-  })
-);
-const obj = {
-  boualem: [1000, 5000, 5000, -800, -1200, -1000],
-  mouloud: [-2000, 5500, 6220, -950, 3000, -478],
+const usersPseudo = {
   mustapha: mustaphaMap,
   amine: amineMap,
 };
@@ -72,74 +64,6 @@ const initialState = () => {
   main.classList.add("hidden");
 };
 initialState();
-// get time
-function getTime() {
-  return new Date().toLocaleDateString("FR-fr", {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    second: "2-digit",
-  });
-}
-//check user
-
-function checkeUser(user, pin) {
-  for (const [key, value] of Object.entries(userObj)) {
-    if (user === key && pin === value) {
-      relevet(key);
-    }
-  }
-}
-
-// map relevet
-
-function relevet(user) {
-  tableau.innerHTML = null;
-  solde.textContent = null;
-
-  obj[user].forEach(([val, cur], date) => {
-    soldefn(val, user, date, cur);
-  });
-  main.classList.remove("hidden");
-
-  mins = 10;
-  seconds = 0;
-  clearInterval(myInterval);
-  myInterval = setInterval(chronofn, 1000);
-}
-
-// display
-
-function soldefn(val, user, date, cur = "$") {
-  solde.textContent = (Number(solde.textContent) + val).toFixed(2);
-
-  tableau.innerHTML += `
-    <div class="exemple">
-        <p>${val > 0 ? "Deposit" : "Withdrew"}</p>
-        <p>${date.slice(0,10)}</p>
-        <p>${val}</p>
-        <p>${cur}</p>
-            </div>
-                    `;
-  let newArr = [];
-  obj[user].forEach(([val, cur], date) => {
-    newArr.push(val);
-  });
-  newArr = newArr.reduce(
-    ([positive, neagative], val) => {
-      val > 0 ? (positive += val) : (neagative += val);
-      return [positive, neagative];
-    },
-    [0, 0]
-  );
-
-  iN.textContent = newArr[0];
-  out.textContent = newArr[1];
-  interest.textContent = (newArr[0] * 0.01).toFixed(2);
-}
-
 //chrono
 
 function chronofn() {
@@ -158,6 +82,75 @@ function chronofn() {
   }`;
 }
 
+// get time local format
+
+function getTime() {
+  return new Date().toLocaleDateString("FR-fr", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+}
+// display
+
+function soldefn(val, user, date, cur = "$") {
+  solde.textContent = (Number(solde.textContent) + val).toFixed(2);
+
+  tableau.innerHTML += `
+    <div class="exemple">
+        <p class=${val>0?"dep":"wit"}>${val > 0 ? "Deposit" : "Withdrew"}</p>
+        <p>${date.slice(0, 10)}</p>
+        <p>${val}</p>
+        <p>${cur}</p>
+            </div>
+                    `;
+  
+  let newArr = [];
+  usersPseudo[user].forEach(([val, cur], date) => {
+    newArr.push(val);
+  });
+  newArr = newArr.reduce(
+    ([positive, neagative], val) => {
+      val > 0 ? (positive += val) : (neagative += val);
+      return [positive, neagative];
+    },
+    [0, 0]
+  );
+
+  iN.textContent = newArr[0];
+  out.textContent = newArr[1];
+  interest.textContent = (newArr[0] * 0.01).toFixed(2);
+}
+// map relevet
+
+function relevet(user) {
+  tableau.innerHTML = null;
+  solde.textContent = null;
+
+  usersPseudo[user].forEach(([val, cur], date) => {
+    soldefn(val, user, date, cur);
+  });
+  main.classList.remove("hidden");
+
+  mins = 10;
+  seconds = 0;
+  clearInterval(myInterval);
+  myInterval = setInterval(chronofn, 1000);
+}
+
+//check user
+
+function checkeUser(user, pin) {
+  for (const [key, value] of Object.entries(usersPin)) {
+    if (user === key && pin === value) {
+      relevet(key);
+    }
+  }
+}
+
 //log in
 
 logIn.addEventListener("click", () => {
@@ -170,8 +163,8 @@ logIn.addEventListener("click", () => {
 transferBtn.addEventListener("click", () => {
   const transferValue = Number(transfer.value);
   const time = getTime();
-  obj[userName.value].set(time, [-transferValue, "$"]);
-  obj[transferTo.value].set(time, [transferValue, "$"]);
+  usersPseudo[userName.value].set(time, [-transferValue, "$"]);
+  usersPseudo[transferTo.value].set(time, [transferValue, "$"]);
   setTimeout(() => {
     soldefn(-transferValue, userName.value, time);
   }, 3000);
@@ -185,7 +178,7 @@ transferBtn.addEventListener("click", () => {
 loanBtn.addEventListener("click", () => {
   const loanValue = Number(loan.value);
   const time = getTime();
-  obj[userName.value].set(time, [loanValue, "$"]);
+  usersPseudo[userName.value].set(time, [loanValue, "$"]);
   setTimeout(() => {
     soldefn(loanValue, userName.value, time);
   }, 3000);
@@ -208,19 +201,19 @@ logoutBtn.addEventListener("click", () => {
 
 sort.addEventListener("click", () => {
   tableau.innerHTML = null;
-  console.log(obj[userName.value]);
+  console.log(usersPseudo[userName.value]);
   if (!sorted) {
     //----
     let sortedMap = [];
-    sortedMap = [...obj[userName.value]];
+    sortedMap = [...usersPseudo[userName.value]];
     sortedMap = sortedMap
       .sort(([date, [a, cur]], [dat, [b, cu]]) => b - a)
       .map(
         ([date, [val, cur]]) =>
           (tableau.innerHTML += `
     <div class="exemple">
-        <p>${val > 0 ? "Deposit" : "Withdrew"}</p>
-        <p>${date.slice(0,10)}</p>
+        <p class=${val>0?"dep":"wit"}>${val > 0 ? "Deposit" : "Withdrew"}</p>
+        <p>${date.slice(0, 10)}</p>
         <p>${val}</p>
         <p>${cur}</p>
             </div>
@@ -229,12 +222,12 @@ sort.addEventListener("click", () => {
     //---------
     sorted = true;
   } else {
-    [...obj[userName.value]].map(
+    [...usersPseudo[userName.value]].map(
       ([date, [val, cur]]) =>
         (tableau.innerHTML += `
   <div class="exemple">
-      <p>${val > 0 ? "Deposit" : "Withdrew"}</p>
-      <p>${date.slice(0,10)}</p>
+      <p class=${val>0?"dep":"wit"}>${val > 0 ? "Deposit" : "Withdrew"}</p>
+      <p>${date.slice(0, 10)}</p>
       <p>${val}</p>
       <p>${cur}</p>
           </div>
@@ -248,5 +241,3 @@ setInterval(() => {
   currentDate.textContent = getTime();
 }, 1000);
 
-let str="bbbbbgfdf"
-console.log(str.slice(0,str.indexOf(",")));
