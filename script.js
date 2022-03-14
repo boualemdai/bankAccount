@@ -20,7 +20,6 @@ const sort = document.getElementById("sort");
 const chrono = document.querySelector(".chrono>span");
 const greeting = document.querySelector("header>h2");
 
-
 let myInterval;
 let seconds;
 let mins;
@@ -44,7 +43,7 @@ const amineMap = new Map([
   ["04/10/2022", [-2000, "$"]],
 ]);
 
-const usersPseudo = {
+const usersMap = {
   mustapha: mustaphaMap,
   amine: amineMap,
 };
@@ -99,17 +98,19 @@ function getTime() {
 function soldefn(val, user, date, cur = "$") {
   solde.textContent = (Number(solde.textContent) + val).toFixed(2);
 
-  tableau.innerHTML += `
+  const html = `
     <div class="exemple">
-        <p class=${val>0?"dep":"wit"}>${val > 0 ? "Deposit" : "Withdrew"}</p>
+        <p class=${val > 0 ? "dep" : "wit"}>${
+    val > 0 ? `Deposit` : `Withdrew`
+  }</p>
         <p>${date.slice(0, 10)}</p>
         <p>${val}</p>
         <p>${cur}</p>
             </div>
                     `;
-  
+  tableau.insertAdjacentHTML("afterbegin", html);
   let newArr = [];
-  usersPseudo[user].forEach(([val, cur], date) => {
+  usersMap[user].forEach(([val, cur], date) => {
     newArr.push(val);
   });
   newArr = newArr.reduce(
@@ -130,9 +131,10 @@ function relevet(user) {
   tableau.innerHTML = null;
   solde.textContent = null;
 
-  usersPseudo[user].forEach(([val, cur], date) => {
+  usersMap[user].forEach(([val, cur], date) => {
     soldefn(val, user, date, cur);
   });
+
   main.classList.remove("hidden");
 
   mins = 10;
@@ -163,8 +165,8 @@ logIn.addEventListener("click", () => {
 transferBtn.addEventListener("click", () => {
   const transferValue = Number(transfer.value);
   const time = getTime();
-  usersPseudo[userName.value].set(time, [-transferValue, "$"]);
-  usersPseudo[transferTo.value].set(time, [transferValue, "$"]);
+  usersMap[userName.value].set(time, [-transferValue, "$"]);
+  usersMap[transferTo.value].set(time, [transferValue, "$"]);
   setTimeout(() => {
     soldefn(-transferValue, userName.value, time);
   }, 3000);
@@ -178,7 +180,7 @@ transferBtn.addEventListener("click", () => {
 loanBtn.addEventListener("click", () => {
   const loanValue = Number(loan.value);
   const time = getTime();
-  usersPseudo[userName.value].set(time, [loanValue, "$"]);
+  usersMap[userName.value].set(time, [loanValue, "$"]);
   setTimeout(() => {
     soldefn(loanValue, userName.value, time);
   }, 3000);
@@ -201,18 +203,20 @@ logoutBtn.addEventListener("click", () => {
 
 sort.addEventListener("click", () => {
   tableau.innerHTML = null;
-  console.log(usersPseudo[userName.value]);
+  console.log(usersMap[userName.value]);
   if (!sorted) {
     //----
     let sortedMap = [];
-    sortedMap = [...usersPseudo[userName.value]];
+    sortedMap = [...usersMap[userName.value]];
     sortedMap = sortedMap
       .sort(([date, [a, cur]], [dat, [b, cu]]) => b - a)
       .map(
         ([date, [val, cur]]) =>
           (tableau.innerHTML += `
     <div class="exemple">
-        <p class=${val>0?"dep":"wit"}>${val > 0 ? "Deposit" : "Withdrew"}</p>
+        <p class=${val > 0 ? "dep" : "wit"}>${
+            val > 0 ? "Deposit" : "Withdrew"
+          }</p>
         <p>${date.slice(0, 10)}</p>
         <p>${val}</p>
         <p>${cur}</p>
@@ -222,17 +226,19 @@ sort.addEventListener("click", () => {
     //---------
     sorted = true;
   } else {
-    [...usersPseudo[userName.value]].map(
-      ([date, [val, cur]]) =>
-        (tableau.innerHTML += `
+    [...usersMap[userName.value]].map(([date, [val, cur]],i) => {
+      const html = `
   <div class="exemple">
-      <p class=${val>0?"dep":"wit"}>${val > 0 ? "Deposit" : "Withdrew"}</p>
+      <p class=${val > 0 ? "dep" : "wit"}>${
+        val > 0 ? `Deposit` : `Withdrew`
+      }</p>
       <p>${date.slice(0, 10)}</p>
       <p>${val}</p>
       <p>${cur}</p>
           </div>
-                  `)
-    );
+                  `;
+      tableau.insertAdjacentHTML("afterbegin", html);
+    });
     sorted = false;
   }
 });
@@ -240,4 +246,6 @@ sort.addEventListener("click", () => {
 setInterval(() => {
   currentDate.textContent = getTime();
 }, 1000);
+
+
 
