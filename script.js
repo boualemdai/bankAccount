@@ -1,3 +1,6 @@
+
+"use strict"
+
 const currentDate = document.querySelector(".display-section > span");
 const logIn = document.getElementById("log-in");
 const userName = document.getElementById("user-name");
@@ -104,8 +107,8 @@ function soldefn(val, user, date, cur = "$") {
     val > 0 ? `Deposit` : `Withdrew`
   }</p>
         <p>${date.slice(0, 10)}</p>
-        <p>${val}</p>
-        <p>${cur}</p>
+        <p >${val}</p>
+        <p >${cur}</p>
             </div>
                     `;
   tableau.insertAdjacentHTML("afterbegin", html);
@@ -125,6 +128,7 @@ function soldefn(val, user, date, cur = "$") {
   out.textContent = newArr[1];
   interest.textContent = (newArr[0] * 0.01).toFixed(2);
 }
+
 // map relevet
 
 function relevet(user) {
@@ -163,6 +167,10 @@ logIn.addEventListener("click", () => {
 // transfer
 
 transferBtn.addEventListener("click", () => {
+  mins = 10;
+  seconds = 0;
+  clearInterval(myInterval);
+  myInterval = setInterval(chronofn, 1000);
   const transferValue = Number(transfer.value);
   const time = getTime();
   usersMap[userName.value].set(time, [-transferValue, "$"]);
@@ -233,7 +241,7 @@ sort.addEventListener("click", () => {
         val > 0 ? `Deposit` : `Withdrew`
       }</p>
       <p>${date.slice(0, 10)}</p>
-      <p>${val}</p>
+      <p >${val}</p>
       <p>${cur}</p>
           </div>
                   `;
@@ -246,6 +254,5 @@ sort.addEventListener("click", () => {
 setInterval(() => {
   currentDate.textContent = getTime();
 }, 1000);
-
 
 
